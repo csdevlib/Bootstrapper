@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using AutoMapper;
 using BeyondNet.Bootstrapper.Interface;
 
@@ -6,9 +6,9 @@ namespace BeyondNet.Bootstrapper.AutoMapper
 {
     public class AutoMapperBootstrapper : IBootstrapper<MapperConfiguration>
     {
-        private readonly Action<IMapperConfigurationExpression> _action;
+        private readonly Action<IMapperConfigurationExpression>? _action;
 
-        public AutoMapperBootstrapper(Action<IMapperConfigurationExpression> action)
+        public AutoMapperBootstrapper(Action<IMapperConfigurationExpression>? action = null)
         {
             _action = action;
         }
@@ -19,6 +19,6 @@ namespace BeyondNet.Bootstrapper.AutoMapper
             Result = config;
         }
 
-        public MapperConfiguration Result { get; private set; }
+        public MapperConfiguration? Result { get; private set; }
     }
 }

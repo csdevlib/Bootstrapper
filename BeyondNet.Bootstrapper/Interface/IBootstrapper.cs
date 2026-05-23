@@ -1,8 +1,8 @@
-﻿namespace BeyondNet.Bootstrapper.Interface
+namespace BeyondNet.Bootstrapper.Interface
 {
     public interface IBootstrapper<out T> : IBootstrapper
     {
-        T Result { get; }
+        T? Result { get; }
     }
 
     public interface IBootstrapper

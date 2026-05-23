@@ -1,25 +1,25 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using BeyondNet.Bootstrapper.Interface;
 
 namespace BeyondNet.Bootstrapper.Impl
 {
     public class CompositeBootstrapper : IBootstrapper
     {
-        private readonly List<IBootstrapper> _bootStrappers;
+        private readonly List<IBootstrapper> _bootstrappers;
 
-        public CompositeBootstrapper(IEnumerable<IBootstrapper> bootStrappers)
+        public CompositeBootstrapper(IEnumerable<IBootstrapper> bootstrappers)
         {
-            _bootStrappers = new List<IBootstrapper>(bootStrappers);
+            _bootstrappers = new List<IBootstrapper>(bootstrappers);
         }
 
         public CompositeBootstrapper()
         {
-            _bootStrappers = new List<IBootstrapper>();
+            _bootstrappers = new List<IBootstrapper>();
         }
 
         public CompositeBootstrapper Add(IBootstrapper bootstrapper)
         {
-            _bootStrappers.Add(bootstrapper);
+            _bootstrappers.Add(bootstrapper);
 
             return this;
         }
@@ -27,9 +27,9 @@ namespace BeyondNet.Bootstrapper.Impl
 
         public void Run()
         {
-            foreach (var bootStrapper in _bootStrappers)
+            foreach (var bootstrapper in _bootstrappers)
             {
-                bootStrapper.Run();
+                bootstrapper.Run();
             }
         }
     }
