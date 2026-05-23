@@ -1,0 +1,33 @@
+name: .NET Build & Test
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+  push:
+    branches: [ main, develop ]
+
+jobs:
+  build-and-test:
+    name: Build & Test (.NET 10)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.x'
+
+      - name: Restore packages
+        run: dotnet restore BeyondNet.Bootstrapper.sln
+
+      - name: Build
+        run: dotnet build BeyondNet.Bootstrapper.sln --no-restore --configuration Release
+
+      - name: Test
+        run: dotnet test BeyondNet.Bootstrapper.sln --no-build --configuration Release --logger "console;verbosity=minimal"
+
+      - name: NuGet vulnerability audit
+        run: dotnet list BeyondNet.Bootstrapper.sln package --vulnerable --include-transitive
